@@ -223,11 +223,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(waffle)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>NU <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NebraskaTeamTotalStats.csv"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>NUperGame <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NebraskaTeamStatsPerGame.csv"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>BigTenPlayers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/BigTenPlayerStats.csv"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>FOTY <span class="ot">&lt;-</span> <span class="fu">read_csv</span> (<span class="st">"data/FOTY.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>NU <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NebraskaTeamTotalStats.csv"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>NUperGame <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/NebraskaTeamStatsPerGame.csv"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>BigTenPlayers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/BigTenPlayerStats.csv"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>FOTY <span class="ot">&lt;-</span> <span class="fu">read_csv</span> (<span class="st">"data/FOTY.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -267,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_encircle</span>(<span class="at">data =</span> Bryce, <span class="fu">aes</span>(<span class="at">x =</span> FGA, <span class="at">y =</span> FG), <span class="at">s_shape =</span> <span class="dv">0</span>, <span class="at">expand =</span> <span class="sc">-</span><span class="fl">0.15</span>, <span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span>     </span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">350</span>, <span class="at">y =</span> <span class="dv">150</span>, <span class="at">label =</span> <span class="st">"Bryce McGowens"</span>)) <span class="sc">+</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"McGowens scored more than all his teammates beside Verge"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"But he shot the ball significantly more than anyone else"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"But he also shot the ball significantly more than anyone else"</span>,</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Field Goal Attempts"</span>, <span class="at">y =</span> <span class="st">"Field Goals Made"</span>,</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"By: Kate Cordes | Source: Sports Reference"</span>) <span class="sc">+</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">400</span>)) <span class="sc">+</span></span>
@@ -374,20 +377,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"royalblue"</span>),</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"red"</span>),</span>
 <span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span>
 <span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>      ),</span>
 <span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Player <span class="sc">==</span> <span class="st">"Player"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Player <span class="sc">==</span> <span class="st">"Bryce McGowens"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="ffarkzeonu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wqaihyhute" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ffarkzeonu) .gt_table {
+:where(#wqaihyhute) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -412,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_heading {
+:where(#wqaihyhute) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -424,12 +427,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_caption {
+:where(#wqaihyhute) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#ffarkzeonu) .gt_title {
+:where(#wqaihyhute) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -441,7 +444,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-:where(#ffarkzeonu) .gt_subtitle {
+:where(#wqaihyhute) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -453,13 +456,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-:where(#ffarkzeonu) .gt_bottom_border {
+:where(#wqaihyhute) .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_col_headings {
+:where(#wqaihyhute) .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -474,7 +477,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_col_heading {
+:where(#wqaihyhute) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -494,7 +497,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#ffarkzeonu) .gt_column_spanner_outer {
+:where(#wqaihyhute) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -506,15 +509,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-:where(#ffarkzeonu) .gt_column_spanner_outer:first-child {
+:where(#wqaihyhute) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ffarkzeonu) .gt_column_spanner_outer:last-child {
+:where(#wqaihyhute) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ffarkzeonu) .gt_column_spanner {
+:where(#wqaihyhute) .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -526,7 +529,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-:where(#ffarkzeonu) .gt_group_heading {
+:where(#wqaihyhute) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -552,7 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   text-align: left;
 }
 
-:where(#ffarkzeonu) .gt_empty_group_heading {
+:where(#wqaihyhute) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -567,15 +570,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-:where(#ffarkzeonu) .gt_from_md > :first-child {
+:where(#wqaihyhute) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ffarkzeonu) .gt_from_md > :last-child {
+:where(#wqaihyhute) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ffarkzeonu) .gt_row {
+:where(#wqaihyhute) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -594,7 +597,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#ffarkzeonu) .gt_stub {
+:where(#wqaihyhute) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -607,7 +610,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ffarkzeonu) .gt_stub_row_group {
+:where(#wqaihyhute) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -621,11 +624,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-:where(#ffarkzeonu) .gt_row_group_first td {
+:where(#wqaihyhute) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ffarkzeonu) .gt_summary_row {
+:where(#wqaihyhute) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -635,16 +638,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ffarkzeonu) .gt_first_summary_row {
+:where(#wqaihyhute) .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_first_summary_row.thick {
+:where(#wqaihyhute) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ffarkzeonu) .gt_last_summary_row {
+:where(#wqaihyhute) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -654,7 +657,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_grand_summary_row {
+:where(#wqaihyhute) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -664,7 +667,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ffarkzeonu) .gt_first_grand_summary_row {
+:where(#wqaihyhute) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -674,11 +677,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_striped {
+:where(#wqaihyhute) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ffarkzeonu) .gt_table_body {
+:where(#wqaihyhute) .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -687,7 +690,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_footnotes {
+:where(#wqaihyhute) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -701,7 +704,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_footnote {
+:where(#wqaihyhute) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -710,7 +713,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ffarkzeonu) .gt_sourcenotes {
+:where(#wqaihyhute) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -724,7 +727,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ffarkzeonu) .gt_sourcenote {
+:where(#wqaihyhute) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -732,64 +735,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ffarkzeonu) .gt_left {
+:where(#wqaihyhute) .gt_left {
   text-align: left;
 }
 
-:where(#ffarkzeonu) .gt_center {
+:where(#wqaihyhute) .gt_center {
   text-align: center;
 }
 
-:where(#ffarkzeonu) .gt_right {
+:where(#wqaihyhute) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ffarkzeonu) .gt_font_normal {
+:where(#wqaihyhute) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ffarkzeonu) .gt_font_bold {
+:where(#wqaihyhute) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ffarkzeonu) .gt_font_italic {
+:where(#wqaihyhute) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ffarkzeonu) .gt_super {
+:where(#wqaihyhute) .gt_super {
   font-size: 65%;
 }
 
-:where(#ffarkzeonu) .gt_footnote_marks {
+:where(#wqaihyhute) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ffarkzeonu) .gt_asterisk {
+:where(#wqaihyhute) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ffarkzeonu) .gt_indent_1 {
+:where(#wqaihyhute) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ffarkzeonu) .gt_indent_2 {
+:where(#wqaihyhute) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ffarkzeonu) .gt_indent_3 {
+:where(#wqaihyhute) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ffarkzeonu) .gt_indent_4 {
+:where(#wqaihyhute) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ffarkzeonu) .gt_indent_5 {
+:where(#wqaihyhute) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -817,11 +820,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td headers="AST" class="gt_row gt_right">64</td>
 <td headers="PTS" class="gt_row gt_right">437</td>
 <td headers="FG%" class="gt_row gt_right">0.498</td></tr>
-    <tr><td headers="Player" class="gt_row gt_left gt_striped">Bryce McGowens</td>
-<td headers="MP" class="gt_row gt_right gt_striped">1032</td>
-<td headers="AST" class="gt_row gt_right gt_striped">43</td>
-<td headers="PTS" class="gt_row gt_right gt_striped">522</td>
-<td headers="FG%" class="gt_row gt_right gt_striped">0.403</td></tr>
+    <tr><td headers="Player" class="gt_row gt_left gt_striped" style="background-color: #FF0000; color: #FFFFFF;">Bryce McGowens</td>
+<td headers="MP" class="gt_row gt_right gt_striped" style="background-color: #FF0000; color: #FFFFFF;">1032</td>
+<td headers="AST" class="gt_row gt_right gt_striped" style="background-color: #FF0000; color: #FFFFFF;">43</td>
+<td headers="PTS" class="gt_row gt_right gt_striped" style="background-color: #FF0000; color: #FFFFFF;">522</td>
+<td headers="FG%" class="gt_row gt_right gt_striped" style="background-color: #FF0000; color: #FFFFFF;">0.403</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
@@ -833,6 +836,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Bryce2 <span class="ot">&lt;-</span> NewBigTenPlayers <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Bryce McGowens"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_quasirandom</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> NewBigTenPlayers,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Pos, <span class="at">y =</span> <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_quasirandom</span>(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> BigTenFreshmen,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Pos, <span class="at">y =</span> <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_quasirandom</span>(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> Bryce2,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Pos, <span class="at">y =</span> <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> Bryce2,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Pos, <span class="at">y =</span> <span class="st">`</span><span class="at">FG%</span><span class="st">`</span>, <span class="at">label =</span> Player),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Position"</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Field Goal Percentage"</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"McGowens shot the ball at a low percentage comapred to other </span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="st">Big Ten players"</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Among guards who played the average number of minutes, Bryce McGowens was near </span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="st">the bottom of the pack shooting the ball"</span>,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"By Kate Cordes | Source: Sports Reference"</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Best <span class="ot">&lt;-</span> BigTenPlayers <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Pos <span class="sc">==</span><span class="st">"G"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TOV<span class="sc">&gt;</span><span class="dv">40</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dumbbell</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> Best,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(Player, AST), <span class="at">x =</span> AST, <span class="at">xend =</span> TOV),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">1</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"grey"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour_x =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour_xend =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"McGowens didn't take care of the ball"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"He had more &lt;span style = 'color:red;'&gt;turnovers&lt;/span&gt; than &lt;span style = 'color:darkgreen;'&gt;assists,&lt;/span&gt; and among Big Ten guards with at least 40 turnovers, he had the second fewest assists"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"Turnovers/Assists"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"By: Kate Cordes | Source: Sports Reference"</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_textbox_simple</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>##among Guards with at least 40 turnovers, McGowens has second fewest assists</p>
 
 
 
